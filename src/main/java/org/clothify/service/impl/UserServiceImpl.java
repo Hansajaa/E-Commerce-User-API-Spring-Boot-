@@ -27,4 +27,10 @@ public class UserServiceImpl implements UserService {
         UserEntity savedEntity = userRepository.save(entity);
         return savedEntity;
     }
+
+    @Override
+    public Boolean existsByUserName(String username) {
+        Boolean isExists = userRepository.existsByUsername(username);
+        return isExists;
+    }
 }

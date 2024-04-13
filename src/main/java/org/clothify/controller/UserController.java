@@ -29,4 +29,9 @@ public class UserController {
         }
         return ResponseEntity.badRequest().body(null);
     }
+
+    @PostMapping("/check-username/{username}")
+    public Boolean checkUserName(@PathVariable String username){
+        return userService.existsByUserName(username);
+    }
 }
