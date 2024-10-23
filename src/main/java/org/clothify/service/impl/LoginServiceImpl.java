@@ -16,9 +16,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class LoginServiceImpl implements LoginService {
 
-    final LoginRepository loginRepository;
-    final ModelMapper mapper;
-    final StrongPasswordEncryptor encryptor;
+    private final LoginRepository loginRepository;
+    private final ModelMapper mapper;
+    private final StrongPasswordEncryptor encryptor;
+
 
     @Override
     public Boolean saveLoginDetails(Login login) {

@@ -1,5 +1,6 @@
 package org.clothify.configuration;
 
+import org.clothify.service.impl.LoginServiceImpl;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
