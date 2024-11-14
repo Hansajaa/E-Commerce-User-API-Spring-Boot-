@@ -22,9 +22,9 @@ public class LoginServiceImpl implements LoginService {
 
 
     @Override
-    public Boolean saveLoginDetails(Login login) {
+    public Boolean saveLoginDetails(Login login) throws NullPointerException{
 
-        LoginEntity entity = mapper.map(login,LoginEntity.class);
+        LoginEntity entity = mapper.map(login, LoginEntity.class);
         entity.setPassword(encryptor.encryptPassword(login.getPassword()));
 
         loginRepository.save(entity);
@@ -32,11 +32,14 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public Boolean authenticateUser(Login login)throws Exception{
-        log.info(login.toString());
-
+    public Boolean authenticateUser(Login login) throws Exception {
 
         LoginEntity byUserName = loginRepository.findByUserName(login.getUserName());
+
+        if(byUserName == null){
+            throw new Exception("User Not Found");
+        }
+
         boolean isCorrect = encryptor.checkPassword(login.getPassword(), byUserName.getPassword());
         if (isCorrect){
             return true;

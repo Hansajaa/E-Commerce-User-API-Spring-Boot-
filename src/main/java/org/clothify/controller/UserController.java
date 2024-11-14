@@ -19,7 +19,7 @@ public class UserController {
     final LoginService loginService;
 
     @PostMapping("/add")
-    public ResponseEntity<UserEntity> createUser(@RequestBody User user){
+    public ResponseEntity<UserEntity> createUser(@RequestBody User user)throws NullPointerException{
 
         Boolean isSaved = loginService.saveLoginDetails(new Login(user.getUsername(), user.getPassword()));
 
