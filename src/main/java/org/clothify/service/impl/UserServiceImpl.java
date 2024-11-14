@@ -20,12 +20,18 @@ public class UserServiceImpl implements UserService {
     final StrongPasswordEncryptor encryptor;
 
     @Override
-    public UserEntity saveUserDetails(User user) {
-        UserEntity entity = mapper.map(user, UserEntity.class);
-        entity.setPassword(encryptor.encryptPassword(user.getPassword()));
+    public UserEntity saveUserDetails(User user) throws NullPointerException{
 
-        UserEntity savedEntity = userRepository.save(entity);
-        return savedEntity;
+        try{
+            UserEntity entity = mapper.map(user, UserEntity.class);
+            entity.setPassword(encryptor.encryptPassword(user.getPassword()));
+
+            UserEntity savedEntity = userRepository.save(entity);
+            return savedEntity;
+        }catch(NullPointerException e){
+            throw new NullPointerException("User cannot be null");
+        }
+
     }
 
     @Override
